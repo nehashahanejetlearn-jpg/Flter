@@ -1,0 +1,1823 @@
+/* ==========================================================================
+   Diwali Celebration & Science Lab - Master Stylesheet
+   Theme: Cosmic Night Indigo & Shimmering Festive Gold
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Outfit:wght@300;400;500;600;700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+:root {
+    /* Color Palette */
+    --bg-deep: #080410;
+    --bg-dark: #0f081d;
+    --bg-surface: rgba(23, 14, 43, 0.75);
+    --bg-surface-elevated: rgba(35, 21, 64, 0.85);
+    --glass-border: rgba(255, 215, 0, 0.22);
+    --glass-border-hover: rgba(255, 215, 0, 0.5);
+    
+    /* Festive Gold & Warm Flame Accents */
+    --gold: #ffbe33;
+    --gold-bright: #ffd700;
+    --gold-glow: rgba(255, 215, 0, 0.45);
+    --flame-outer: #ff4500;
+    --flame-core: #fff3b0;
+    --vermilion: #e63946;
+    --marigold: #fb8500;
+    --emerald: #06d6a0;
+    --peacock: #118ab2;
+    --neon-pink: #ff007f;
+    --royal-purple: #7209b7;
+
+    /* Text Colors */
+    --text-primary: #f8f9fa;
+    --text-secondary: #d1c4e9;
+    --text-muted: #958ba5;
+
+    /* Shadows & Glows */
+    --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.5);
+    --shadow-gold: 0 0 25px rgba(255, 190, 51, 0.35);
+    --shadow-flame: 0 0 35px rgba(255, 87, 34, 0.5);
+
+    /* Fonts */
+    --font-heading: 'Cinzel Decorative', Georgia, serif;
+    --font-body: 'Poppins', sans-serif;
+    --font-ui: 'Outfit', sans-serif;
+
+    /* Radii */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-pill: 9999px;
+}
+
+/* Base Reset & Typography */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background-color: var(--bg-deep);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+    background-image: 
+        radial-gradient(circle at 10% 15%, rgba(255, 87, 34, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 90% 20%, rgba(114, 9, 183, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(255, 215, 0, 0.08) 0%, transparent 50%);
+    background-attachment: fixed;
+}
+
+/* Ambient Particles Canvas (Floating Petals & Stars) */
+#ambient-bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.app-wrapper {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+}
+
+/* Top Navigation Bar */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0 16px;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(8, 4, 16, 0.85);
+}
+
+.brand-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.brand-icon-wrapper {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    filter: drop-shadow(0 0 12px var(--gold));
+    animation: diyaPulse 2.5s infinite ease-in-out;
+}
+
+.brand-title-group h1 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #ffd700, #ffaa00, #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 1px;
+}
+
+.brand-title-group .sub-brand {
+    font-size: 0.8rem;
+    font-family: var(--font-ui);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.audio-ctrl-btn {
+    background: var(--bg-surface);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.audio-ctrl-btn:hover {
+    border-color: var(--gold-bright);
+    box-shadow: 0 0 16px var(--gold-glow);
+    transform: translateY(-1px);
+}
+
+.audio-ctrl-btn.active {
+    background: linear-gradient(135deg, rgba(255, 190, 51, 0.25), rgba(255, 87, 34, 0.25));
+    border-color: var(--gold-bright);
+    color: var(--gold-bright);
+}
+
+.audio-ctrl-btn.muted {
+    opacity: 0.6;
+    color: var(--text-muted);
+}
+
+.music-pulse-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--emerald);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--emerald);
+    animation: pulseDot 1s infinite alternate;
+}
+
+/* Hero Section */
+.hero-banner-section {
+    position: relative;
+    border-radius: var(--radius-lg);
+    margin: 28px 0;
+    overflow: hidden;
+    min-height: 380px;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-soft), 0 0 40px rgba(255, 170, 0, 0.15);
+}
+
+.hero-bg-media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.45) saturate(1.2);
+    transform: scale(1.02);
+    transition: transform 6s ease;
+}
+
+.hero-banner-section:hover .hero-bg-media {
+    transform: scale(1.05);
+}
+
+.hero-content-overlay {
+    position: relative;
+    z-index: 3;
+    padding: 48px;
+    max-width: 760px;
+    background: linear-gradient(90deg, rgba(8, 4, 16, 0.9) 0%, rgba(8, 4, 16, 0.65) 60%, transparent 100%);
+}
+
+.hero-sanskrit-tag {
+    display: inline-block;
+    font-family: var(--font-heading);
+    color: var(--gold);
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    text-shadow: 0 0 12px var(--gold-glow);
+}
+
+.hero-main-title {
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #ffffff 0%, #ffd700 70%, #ff8800 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-description {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: 28px;
+}
+
+.hero-action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.btn-festive-primary {
+    background: linear-gradient(135deg, #ff9e00 0%, #e85d04 100%);
+    color: #ffffff;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 12px 24px;
+    border-radius: var(--radius-pill);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(232, 93, 4, 0.45);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-festive-primary:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 28px rgba(255, 158, 0, 0.6);
+}
+
+.btn-festive-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 12px 24px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--glass-border);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-festive-secondary:hover {
+    background: rgba(255, 215, 0, 0.15);
+    border-color: var(--gold-bright);
+    color: var(--gold-bright);
+    transform: translateY(-2px);
+}
+
+/* Tab Navigation Menu */
+.tab-navigation-container {
+    display: flex;
+    overflow-x: auto;
+    padding: 6px;
+    margin-bottom: 32px;
+    background: var(--bg-surface);
+    backdrop-filter: blur(16px);
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--glass-border);
+    gap: 6px;
+    scrollbar-width: none;
+}
+
+.tab-navigation-container::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-tab-btn {
+    flex: 1 0 auto;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-family: var(--font-ui);
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 12px 20px;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.nav-tab-btn:hover {
+    color: var(--gold-bright);
+    background: rgba(255, 215, 0, 0.08);
+}
+
+.nav-tab-btn.active {
+    background: linear-gradient(135deg, rgba(255, 190, 51, 0.28), rgba(230, 57, 70, 0.28));
+    color: var(--gold-bright);
+    border: 1px solid var(--glass-border-hover);
+    box-shadow: 0 4px 16px rgba(255, 170, 0, 0.25);
+    font-weight: 600;
+}
+
+/* Tab Panel Management */
+.tab-panel {
+    display: none;
+    animation: fadeInPanel 0.4s ease forwards;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+@keyframes fadeInPanel {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Shared Section Header */
+.section-headline-group {
+    margin-bottom: 24px;
+}
+
+.section-tag {
+    font-family: var(--font-ui);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: var(--gold);
+    margin-bottom: 6px;
+    display: block;
+}
+
+.section-headline-group h2 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: #ffffff;
+    margin-bottom: 6px;
+}
+
+.section-headline-group p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   MODULE 1: VIRTUAL DIYA SANCTUARY
+   ========================================================================== */
+.diya-sanctuary-wrapper {
+    background: var(--bg-surface);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.6s ease;
+}
+
+.sanctuary-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.12);
+}
+
+.sanctuary-status-badge {
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid var(--gold);
+    color: var(--gold-bright);
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.sanctuary-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.sanctuary-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.sanctuary-btn:hover {
+    border-color: var(--gold);
+    background: rgba(255, 215, 0, 0.15);
+    color: var(--gold-bright);
+}
+
+.sanctuary-btn.active {
+    background: var(--flame-outer);
+    border-color: var(--gold);
+    color: #fff;
+    box-shadow: 0 0 16px var(--shadow-flame);
+}
+
+/* Diyas Grid */
+.diyas-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-bottom: 36px;
+}
+
+.diya-item-card {
+    background: var(--bg-surface-elevated);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.diya-item-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+.diya-item-card.is-lit {
+    border-color: var(--gold);
+    box-shadow: 0 0 30px rgba(255, 140, 0, 0.3);
+    background: linear-gradient(180deg, rgba(35, 21, 64, 0.9) 0%, rgba(60, 25, 30, 0.6) 100%);
+}
+
+.diya-visual-container {
+    width: 130px;
+    height: 120px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+/* Realistic Diya Clay Body */
+.diya-clay-body {
+    width: 90px;
+    height: 40px;
+    background: linear-gradient(180deg, #934316 0%, #572007 100%);
+    border-radius: 4px 4px 45px 45px;
+    position: relative;
+    box-shadow: inset 0 -4px 8px rgba(0, 0, 0, 0.6), 0 8px 16px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.oil-surface {
+    position: absolute;
+    top: 3px;
+    left: 8px;
+    right: 8px;
+    height: 12px;
+    background: linear-gradient(180deg, #ffd700 0%, #b8860b 100%);
+    border-radius: 50%;
+    opacity: 0.85;
+}
+
+/* Cotton Wick & Multi-Flame Thermodynamics */
+.wick-assembly {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cotton-wick {
+    width: 4px;
+    height: 12px;
+    background: #333;
+    border-radius: 2px;
+}
+
+.flame-element {
+    position: absolute;
+    bottom: 8px;
+    width: 24px;
+    height: 48px;
+    display: none;
+    pointer-events: none;
+    transform-origin: center bottom;
+}
+
+.flame-element.visible {
+    display: block;
+    animation: flameFlicker 0.12s infinite alternate ease-in-out;
+}
+
+.flame-outer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, #ff0055 0%, #ff5722 45%, #ffd700 90%);
+    border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
+    filter: blur(1px);
+    opacity: 0.9;
+}
+
+.flame-inner {
+    position: absolute;
+    top: 8px;
+    left: 4px;
+    right: 4px;
+    bottom: 2px;
+    background: linear-gradient(180deg, #ff9900 0%, #ffea00 80%);
+    border-radius: 50% 50% 40% 40% / 65% 65% 35% 35%;
+}
+
+.flame-core {
+    position: absolute;
+    top: 20px;
+    left: 7px;
+    right: 7px;
+    bottom: 3px;
+    background: #ffffff;
+    border-radius: 50%;
+    filter: blur(0.5px);
+    box-shadow: 0 0 12px #fff;
+}
+
+.flame-halo {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 64px;
+    height: 88px;
+    background: radial-gradient(circle, rgba(255, 170, 0, 0.45) 0%, rgba(255, 87, 34, 0.15) 50%, transparent 75%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: haloPulse 2s infinite ease-in-out;
+}
+
+@keyframes flameFlicker {
+    0% { transform: scale(1) rotate(-1.5deg); }
+    100% { transform: scale(1.05, 0.97) rotate(1.5deg); }
+}
+
+@keyframes haloPulse {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 0.95; transform: scale(1.1); }
+}
+
+@keyframes diyaPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); filter: drop-shadow(0 0 20px var(--gold-bright)); }
+}
+
+@keyframes pulseDot {
+    0% { transform: scale(0.8); opacity: 0.6; }
+    100% { transform: scale(1.2); opacity: 1; }
+}
+
+.diya-meta h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+}
+
+.diya-blessing-text {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    min-height: 38px;
+    margin-bottom: 12px;
+}
+
+.diya-action-btn {
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid var(--glass-border);
+    color: var(--gold-bright);
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    font-size: 0.8rem;
+    font-family: var(--font-ui);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.diya-item-card.is-lit .diya-action-btn {
+    background: rgba(6, 214, 160, 0.15);
+    border-color: var(--emerald);
+    color: var(--emerald);
+}
+
+/* Sky Lanterns (Akash Kandil) Section */
+.sky-lanterns-container {
+    background: rgba(10, 5, 22, 0.85);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    margin-top: 24px;
+    position: relative;
+}
+
+.lantern-canvas-wrapper {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    background: radial-gradient(circle at bottom, #1d0e33 0%, #080312 100%);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+#sky-lanterns-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.lantern-release-controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.lantern-wish-input {
+    flex: 1 1 240px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-pill);
+    padding: 10px 18px;
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.lantern-wish-input:focus {
+    border-color: var(--gold-bright);
+    box-shadow: 0 0 12px var(--gold-glow);
+}
+
+.lantern-color-picker {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-pill);
+    padding: 9px 14px;
+    color: #fff;
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    outline: none;
+}
+
+.lantern-color-picker option {
+    background: #110a1d;
+    color: #fff;
+}
+
+.community-wishes-list {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+}
+
+.wish-bubble-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: var(--radius-pill);
+    padding: 4px 12px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    animation: fadeInPanel 0.3s ease;
+}
+
+/* Virtual Matchstick Cursor */
+#virtual-matchstick-cursor {
+    position: fixed;
+    width: 24px;
+    height: 70px;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -10px) rotate(-25deg);
+    display: none;
+}
+
+.match-stick-wood {
+    width: 6px;
+    height: 45px;
+    background: #c29b61;
+    margin: 0 auto;
+    border-radius: 1px;
+}
+
+.match-head-phosphorus {
+    width: 10px;
+    height: 12px;
+    background: #b71c1c;
+    border-radius: 5px 5px 2px 2px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.match-flame {
+    position: absolute;
+    top: -24px;
+    left: -7px;
+    width: 24px;
+    height: 32px;
+    background: radial-gradient(circle, #fff 0%, #ffeb3b 40%, #ff5722 80%, transparent 100%);
+    border-radius: 50% 50% 30% 30%;
+    filter: drop-shadow(0 0 10px #ff9800);
+    animation: flameFlicker 0.1s infinite alternate;
+}
+
+/* Toast Celebration */
+.sanctuary-toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, #2b134d 0%, #7209b7 100%);
+    border: 1px solid var(--gold);
+    color: #fff;
+    padding: 16px 24px;
+    border-radius: var(--radius-md);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 30px var(--gold-glow);
+    display: none;
+    z-index: 1000;
+    animation: slideInToast 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.sanctuary-toast.active {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+@keyframes slideInToast {
+    from { transform: translateY(40px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* ==========================================================================
+   MODULE 2: NIGHT SKY FIREWORKS SIMULATOR
+   ========================================================================== */
+.fireworks-wrapper {
+    background: var(--bg-surface);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    overflow: hidden;
+}
+
+.fireworks-canvas-container {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 90%, #150a28 0%, #07030e 100%);
+    border: 1px solid rgba(255, 215, 0, 0.15);
+    margin-bottom: 20px;
+    cursor: crosshair;
+}
+
+#fireworks-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.canvas-hint-overlay {
+    position: absolute;
+    top: 16px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    pointer-events: none;
+}
+
+.fireworks-control-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px;
+    background: rgba(15, 8, 29, 0.7);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.firework-preset-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.ctrl-label {
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.firework-select {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--glass-border);
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    outline: none;
+}
+
+.firework-select option {
+    background: #110a1d;
+    color: #fff;
+}
+
+.eco-stats-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(6, 214, 160, 0.1);
+    border: 1px solid rgba(6, 214, 160, 0.3);
+    border-radius: var(--radius-pill);
+    padding: 8px 20px;
+}
+
+.eco-stat-item {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.eco-stat-item strong {
+    color: var(--emerald);
+    font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   MODULE 3: KALEIDOSCOPE RANGOLI STUDIO
+   ========================================================================== */
+.rangoli-studio-wrapper {
+    background: var(--bg-surface);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+}
+
+.rangoli-layout-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 32px;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .rangoli-layout-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.rangoli-tools-panel {
+    background: var(--bg-surface-elevated);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tool-group-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    margin-bottom: 10px;
+    font-family: var(--font-ui);
+}
+
+.color-swatches-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.rangoli-color-swatch {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.rangoli-color-swatch:hover {
+    transform: scale(1.15);
+}
+
+.rangoli-color-swatch.active {
+    border-color: #ffffff;
+    transform: scale(1.18);
+    box-shadow: 0 0 16px currentColor;
+}
+
+.brush-buttons-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.rangoli-brush-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.rangoli-brush-btn:hover {
+    background: rgba(255, 215, 0, 0.15);
+}
+
+.rangoli-brush-btn.active {
+    background: var(--gold);
+    color: #110a1d;
+    font-weight: 600;
+}
+
+.slider-ctrl-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.slider-label-val {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.custom-range-slider {
+    width: 100%;
+    accent-color: var(--gold-bright);
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    outline: none;
+}
+
+.stencils-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.stencil-select-btn {
+    flex: 1 1 80px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.stencil-select-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold-bright);
+}
+
+.rangoli-canvas-viewport {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+#rangoli-canvas {
+    border-radius: 50%;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.15);
+    cursor: crosshair;
+    background: #110a1d;
+    touch-action: none;
+}
+
+.rangoli-viewport-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* ==========================================================================
+   MODULE 4: THE SCIENCE OF DIWALI LAB (STEM)
+   ========================================================================== */
+.science-lab-wrapper {
+    background: var(--bg-surface);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+}
+
+.experiment-cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+}
+
+.experiment-card {
+    background: var(--bg-surface-elevated);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    position: relative;
+}
+
+.exp-badge {
+    display: inline-block;
+    background: rgba(17, 138, 178, 0.2);
+    border: 1px solid var(--peacock);
+    color: #4cc9f0;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+/* Flame Spectroscopy Rig */
+.flame-lab-rig {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 28px;
+    margin-top: 20px;
+    align-items: center;
+}
+
+@media (max-width: 850px) {
+    .flame-lab-rig {
+        grid-template-columns: 1fr;
+    }
+}
+
+.bunsen-burner-scene {
+    height: 320px;
+    background: radial-gradient(circle at 50% 80%, #170d2b 0%, #07030e 100%);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--glass-border);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 24px;
+}
+
+.lab-bunsen-burner {
+    width: 32px;
+    height: 90px;
+    background: linear-gradient(90deg, #555 0%, #888 50%, #333 100%);
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.burner-base {
+    width: 90px;
+    height: 16px;
+    background: #222;
+    border-radius: 8px;
+    position: absolute;
+    bottom: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.bunsen-flame {
+    position: absolute;
+    bottom: 90px;
+    width: 44px;
+    height: 120px;
+    background: radial-gradient(ellipse at bottom, rgba(50, 150, 255, 0.9) 0%, rgba(0, 100, 255, 0.6) 50%, transparent 100%);
+    border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
+    transform-origin: center bottom;
+    animation: flameFlicker 0.15s infinite alternate ease-in-out;
+    box-shadow: 0 0 25px rgba(0, 100, 255, 0.5);
+    transition: background 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* Nichrome Wire Loop Animation */
+.nichrome-wire {
+    position: absolute;
+    width: 140px;
+    height: 6px;
+    background: #999;
+    border-radius: 3px;
+    top: 50px;
+    left: 20px;
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: left center;
+}
+
+.nichrome-wire::after {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: -5px;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+}
+
+.nichrome-wire.dipping {
+    top: 240px;
+    left: 40px;
+    transform: rotate(25deg);
+}
+
+.nichrome-wire.in-flame {
+    top: 150px;
+    left: 120px;
+    transform: rotate(5deg);
+}
+
+.petri-dish-holder {
+    position: absolute;
+    bottom: 24px;
+    left: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.petri-dish {
+    width: 60px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    position: relative;
+}
+
+#petri-dish-salt-sample {
+    position: absolute;
+    top: 3px;
+    left: 6px;
+    right: 6px;
+    bottom: 3px;
+    background: #ff0037;
+    border-radius: 50%;
+    box-shadow: 0 0 8px currentColor;
+    transition: background 0.3s ease;
+}
+
+/* Spectroscopy Info Card */
+.spectroscopy-info-box {
+    background: rgba(10, 5, 20, 0.6);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+}
+
+.salt-selection-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.salt-selector-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-primary);
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.salt-selector-btn.active {
+    border-color: var(--gold);
+    background: rgba(255, 215, 0, 0.2);
+    color: var(--gold-bright);
+    font-weight: 600;
+}
+
+.spectrogram-container {
+    margin: 14px 0;
+}
+
+.spectrum-base-gradient {
+    width: 100%;
+    height: 36px;
+    background: linear-gradient(90deg, 
+        #240046 0%, #3a0ca3 15%, #0077b6 35%, #00f5d4 50%, 
+        #70e000 65%, #ffee38 78%, #ff6000 88%, #d00000 100%);
+    border-radius: var(--radius-sm);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.spectral-line-marker {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    box-shadow: 0 0 8px #fff;
+}
+
+.flame-lab-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+/* Experiment 2: Capillary Action */
+.diya-physics-rig {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 28px;
+    margin-top: 20px;
+    align-items: center;
+}
+
+@media (max-width: 800px) {
+    .diya-physics-rig {
+        grid-template-columns: 1fr;
+    }
+}
+
+.microscope-wick-view {
+    height: 280px;
+    background: #0d0718;
+    border: 2px solid var(--gold);
+    border-radius: var(--radius-md);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cotton-fibers-weave {
+    position: absolute;
+    inset: 16px;
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+#wick-fluid-rise-indicator {
+    width: 45px;
+    height: 60%;
+    background: #ffd700;
+    border-radius: 4px 4px 0 0;
+    transition: height 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.4s ease;
+    box-shadow: 0 0 16px rgba(255, 215, 0, 0.4);
+}
+
+.physics-equation-box {
+    background: rgba(10, 5, 20, 0.6);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.physics-equation-box code {
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    color: var(--gold-bright);
+}
+
+.fuel-options-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 14px 0;
+}
+
+.fuel-radio-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--glass-border);
+}
+
+/* Experiment 3: Eco Crackers Analyzer */
+.green-crackers-dashboard {
+    margin-top: 16px;
+}
+
+.metric-bar-group {
+    margin: 14px 0;
+}
+
+.metric-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+    color: var(--text-secondary);
+}
+
+.metric-progress-track {
+    width: 100%;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+}
+
+.metric-progress-fill {
+    height: 100%;
+    transition: width 0.6s ease, background-color 0.6s ease;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+/* ==========================================================================
+   MODULE 5: FESTIVE GREETING CARD MAKER
+   ========================================================================== */
+.greeting-card-wrapper {
+    background: var(--bg-surface);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+}
+
+.card-maker-grid {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 32px;
+    align-items: start;
+}
+
+@media (max-width: 950px) {
+    .card-maker-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card-controls-panel {
+    background: var(--bg-surface-elevated);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.card-input-field {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.card-input-field:focus {
+    border-color: var(--gold-bright);
+}
+
+.card-theme-options, .card-sticker-options {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.card-theme-label, .card-sticker-label {
+    font-size: 0.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--glass-border);
+}
+
+.card-preview-viewport {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-canvas-frame {
+    width: 100%;
+    max-width: 680px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.7), 0 0 30px var(--gold-glow);
+    border: 2px solid var(--gold);
+}
+
+#greeting-card-canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ==========================================================================
+   MODULE 6: 5 DAYS & CULTURAL FOLKLORE
+   ========================================================================== */
+.story-timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.day-story-card {
+    background: var(--bg-surface);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+.day-story-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--glass-border-hover);
+    box-shadow: var(--shadow-gold);
+}
+
+.day-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.day-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    text-transform: uppercase;
+}
+
+.day-icon {
+    font-size: 24px;
+}
+
+.day-story-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    margin-bottom: 4px;
+}
+
+.day-sanskrit {
+    font-size: 0.85rem;
+    color: var(--gold);
+    margin-bottom: 12px;
+}
+
+.day-summary {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.open-story-modal-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    font-size: 0.85rem;
+    font-family: var(--font-ui);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+.open-story-modal-btn:hover {
+    background: var(--gold);
+    color: #110a1d;
+    font-weight: 600;
+}
+
+/* Story Modal */
+.story-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 2, 8, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.story-modal-backdrop.active {
+    display: flex;
+}
+
+.story-modal-dialog {
+    background: #150c26;
+    border: 1px solid var(--gold);
+    border-radius: var(--radius-lg);
+    max-width: 680px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 36px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px var(--gold-glow);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.modal-section-box {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    margin-top: 12px;
+}
+
+.modal-section-box h4 {
+    color: var(--gold-bright);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   MODULE 7: FESTIVE TRIVIA & CERTIFICATE
+   ========================================================================== */
+.quiz-quest-wrapper {
+    background: var(--bg-surface);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.quiz-progress-bar-track {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 12px 0 24px;
+}
+
+#quiz-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--emerald) 100%);
+    transition: width 0.4s ease;
+}
+
+.quiz-question-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+    line-height: 1.5;
+}
+
+.quiz-options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.quiz-option-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-md);
+    padding: 14px 20px;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: all 0.25s ease;
+}
+
+.quiz-option-btn:hover:not(:disabled) {
+    background: rgba(255, 215, 0, 0.15);
+    border-color: var(--gold);
+    transform: translateX(4px);
+}
+
+.opt-prefix {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.quiz-option-btn.correct {
+    background: rgba(6, 214, 160, 0.25) !important;
+    border-color: var(--emerald) !important;
+    color: #ffffff !important;
+}
+
+.quiz-option-btn.incorrect {
+    background: rgba(230, 57, 70, 0.25) !important;
+    border-color: var(--vermilion) !important;
+    color: #ffffff !important;
+}
+
+.quiz-feedback-box {
+    padding: 16px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.quiz-feedback-box.hidden {
+    display: none;
+}
+
+.quiz-feedback-box.correct-feedback {
+    background: rgba(6, 214, 160, 0.15);
+    border: 1px solid var(--emerald);
+    color: #a7f3d0;
+}
+
+.quiz-feedback-box.incorrect-feedback {
+    background: rgba(230, 57, 70, 0.15);
+    border: 1px solid var(--vermilion);
+    color: #fecdd3;
+}
+
+.quiz-results-container.hidden {
+    display: none;
+}
+
+.confetti-canvas-wrapper {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    margin-bottom: 20px;
+}
+
+#confetti-canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.certificate-section-box {
+    background: rgba(10, 5, 20, 0.6);
+    border: 1px solid var(--gold);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    text-align: center;
+    margin-top: 24px;
+}
+
+.cert-input-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin: 16px 0;
+}
+
+#certificate-canvas {
+    display: none; /* Renders off-screen for PNG download */
+}
+
+/* Footer */
+.app-footer {
+    text-align: center;
+    padding: 40px 0 20px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(255, 215, 0, 0.1);
+    margin-top: 60px;
+}
+
+.app-footer a {
+    color: var(--gold);
+    text-decoration: none;
+}

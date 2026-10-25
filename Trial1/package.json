@@ -1,0 +1,19 @@
+{
+  "name": "diwali-celebration-science-lab",
+  "version": "1.0.0",
+  "description": "Interactive Diwali Celebration & STEM Science Lab",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "echo 'Static build ready'"
+  },
+  "keywords": [
+    "diwali",
+    "festival-of-lights",
+    "stem",
+    "fireworks-simulation",
+    "rangoli-generator"
+  ],
+  "author": "JetLearn AI Inventors",
+  "license": "MIT"
+}

@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diwali Celebration & Science Lab | Interactive Festival Experience</title>
+    <meta name="description" content="An interactive celebration of the Festival of Lights: physics-based fireworks simulator, virtual diya sanctuary, kaleidoscopic rangoli studio, pyrotechnic chemistry science lab, and personalized greeting card maker.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪔</text></svg>">
+</head>
+<body>
+    <!-- Ambient Floating Marigold Petals & Golden Twinkle Stars Canvas -->
+    <canvas id="ambient-bg-canvas" aria-hidden="true"></canvas>
+
+    <!-- Virtual Matchstick Cursor (Visible when striking match) -->
+    <div id="virtual-matchstick-cursor" aria-hidden="true">
+        <div class="match-flame"></div>
+        <div class="match-head-phosphorus"></div>
+        <div class="match-stick-wood"></div>
+    </div>
+
+    <!-- Celebration Toast -->
+    <div id="sanctuary-celebration-toast" class="sanctuary-toast" role="alert">
+        <span style="font-size: 28px;">🪔</span>
+        <div>
+            <h4 style="margin: 0; color: #ffd700;">All Diyas Ignited!</h4>
+            <p style="margin: 2px 0 0; font-size: 0.85rem; color: #f1f1f1;">May the divine glow illuminate your life with infinite wisdom and prosperity!</p>
+        </div>
+    </div>
+
+    <div class="app-wrapper">
+        <!-- Main Navigation Header -->
+        <header class="main-header" role="banner">
+            <div class="brand-container">
+                <div class="brand-icon-wrapper" aria-hidden="true">🪔</div>
+                <div class="brand-title-group">
+                    <h1>SHUBH DEEPAWALI</h1>
+                    <div class="sub-brand">
+                        <span>Festival of Lights & Science Innovation</span>
+                        <span style="color: var(--gold);">•</span>
+                        <span>JetLearn AI Inventors</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <button id="toggle-music-btn" class="audio-ctrl-btn" type="button" aria-label="Toggle Meditative Ambient Soundscape">
+                    🎵 Ambient Soundscape
+                </button>
+                <button id="toggle-mute-btn" class="audio-ctrl-btn" type="button" aria-label="Toggle Sound Effects">
+                    🔊 Sound Effects: ON
+                </button>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero-banner-section" aria-label="Festival Introduction">
+            <img src="assets/hero_banner.jpg" alt="Spectacular Diwali celebration with glowing diyas, rangoli, and fireworks" class="hero-bg-media">
+            <div class="hero-content-overlay">
+                <span class="hero-sanskrit-tag">तमसो मा ज्योतिर्गमय • LEAD ME FROM DARKNESS UNTO LIGHT</span>
+                <h2 class="hero-main-title">Experience the Magic & Science of Diwali</h2>
+                <p class="hero-description">
+                    Celebrate the triumphant Festival of Lights through a cutting-edge interactive journey! 
+                    Light authentic oil lamps, launch zero-emission physics fireworks, craft symmetrical rangoli mandalas, 
+                    and explore the fascinating atomic chemistry behind firework colors.
+                </p>
+                <div class="hero-action-buttons">
+                    <button class="btn-festive-primary hero-action-jump" data-target-tab="tab-diya" type="button">
+                        🪔 Light Virtual Diyas
+                    </button>
+                    <button class="btn-festive-secondary hero-action-jump" data-target-tab="tab-fireworks" type="button">
+                        🎆 Launch Fireworks
+                    </button>
+                    <button class="btn-festive-secondary hero-action-jump" data-target-tab="tab-science" type="button">
+                        🔬 Enter Science Lab
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Navigation Tabs -->
+        <nav class="tab-navigation-container" role="tablist" aria-label="Diwali Project Modules">
+            <button class="nav-tab-btn active" data-tab="tab-diya" role="tab" aria-selected="true" id="nav-btn-diya">
+                🪔 Diya Sanctuary & Wishes
+            </button>
+            <button class="nav-tab-btn" data-tab="tab-fireworks" role="tab" aria-selected="false" id="nav-btn-fireworks">
+                🎆 Night Fireworks & Sparklers
+            </button>
+            <button class="nav-tab-btn" data-tab="tab-rangoli" role="tab" aria-selected="false" id="nav-btn-rangoli">
+                🎨 Kaleidoscope Rangoli
+            </button>
+            <button class="nav-tab-btn" data-tab="tab-science" role="tab" aria-selected="false" id="nav-btn-science">
+                🔬 The Science of Diwali Lab
+            </button>
+            <button class="nav-tab-btn" data-tab="tab-cards" role="tab" aria-selected="false" id="nav-btn-cards">
+                💌 Greeting Card Maker
+            </button>
+            <button class="nav-tab-btn" data-tab="tab-story" role="tab" aria-selected="false" id="nav-btn-story">
+                📜 5 Days & Folklore
+            </button>
+            <button class="nav-tab-btn" data-tab="tab-quiz" role="tab" aria-selected="false" id="nav-btn-quiz">
+                🏆 Festive Trivia & Certificate
+            </button>
+        </nav>
+
+        <!-- ==================================================================
+             MODULE 1: VIRTUAL DIYA SANCTUARY & SKY LANTERNS
+             ================================================================== -->
+        <section id="tab-diya" class="tab-panel active" role="tabpanel" aria-labelledby="nav-btn-diya">
+            <div class="section-headline-group">
+                <span class="section-tag">Auspicious Illumination</span>
+                <h2>Virtual Diya Sanctuary & Wish Lanterns</h2>
+                <p>Ignite traditional terracotta lamps with the interactive matchstick, bask in the warm flickering glow, and release your wish lantern into the celestial heavens.</p>
+            </div>
+
+            <div id="diya-sanctuary-scene" class="diya-sanctuary-wrapper">
+                <div class="sanctuary-toolbar">
+                    <div class="sanctuary-status-badge">
+                        🪔 Lit Lamps: <span id="lit-diyas-count">1 / 7</span>
+                    </div>
+                    <div class="sanctuary-actions">
+                        <button id="toggle-matchstick-btn" class="sanctuary-btn" type="button">
+                            🕯️ Strike Matchstick
+                        </button>
+                        <button id="light-all-diyas-btn" class="sanctuary-btn" type="button">
+                            ✨ Light All Lamps
+                        </button>
+                        <button id="extinguish-all-btn" class="sanctuary-btn" type="button">
+                            💨 Extinguish All
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Handcrafted Traditional Clay Diyas Grid -->
+                <div id="diyas-grid" class="diyas-grid-container"></div>
+
+                <!-- Floating Sky Lanterns (Akash Kandil) Feature -->
+                <div class="sky-lanterns-container">
+                    <h3 style="font-family: var(--font-heading); color: var(--gold); margin-bottom: 8px;">
+                        🏮 Akash Kandil • Release a Sky Lantern Wish
+                    </h3>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">
+                        Write your prayer, blessing, or dream for the upcoming year and release a glowing silk sky lantern into the starry night sky.
+                    </p>
+
+                    <div class="lantern-canvas-wrapper">
+                        <canvas id="sky-lanterns-canvas"></canvas>
+                    </div>
+
+                    <div class="lantern-release-controls">
+                        <input type="text" id="lantern-wish-input" class="lantern-wish-input" placeholder="Type your festive wish (e.g. Health, Joy, Academic Success)..." maxlength="50">
+                        <select id="lantern-color-select" class="lantern-color-picker" aria-label="Lantern Silk Color">
+                            <option value="#ff9900">Saffron Gold Silk</option>
+                            <option value="#e63946">Vermilion Crimson</option>
+                            <option value="#06d6a0">Emerald Green</option>
+                            <option value="#118ab2">Peacock Blue</option>
+                            <option value="#ff007f">Lotus Rani Pink</option>
+                        </select>
+                        <button id="release-lantern-btn" class="btn-festive-primary" type="button">
+                            🏮 Release Lantern to Sky
+                        </button>
+                    </div>
+
+                    <div id="community-wishes-list" class="community-wishes-list" aria-live="polite"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             MODULE 2: NIGHT SKY FIREWORKS & SPARKLERS SIMULATOR
+             ================================================================== -->
+        <section id="tab-fireworks" class="tab-panel" role="tabpanel" aria-labelledby="nav-btn-fireworks">
+            <div class="section-headline-group">
+                <span class="section-tag">Eco-Friendly Pyrotechnics</span>
+                <h2>Night Sky Fireworks & Handheld Sparkler Simulator</h2>
+                <p>Click or drag anywhere in the midnight sky to launch physics-accurate fireworks, burst spinning chakkars and ground anars, or switch to handheld sparkler mode to draw sparkling trails!</p>
+            </div>
+
+            <div class="fireworks-wrapper">
+                <div class="fireworks-canvas-container">
+                    <canvas id="fireworks-canvas"></canvas>
+                    <div class="canvas-hint-overlay">
+                        🖱️ Click anywhere in the sky to launch • Drag to burst multiple rockets
+                    </div>
+                </div>
+
+                <div class="fireworks-control-bar">
+                    <div class="firework-preset-group">
+                        <span class="ctrl-label">Burst Type:</span>
+                        <select id="firework-type-select" class="firework-select" aria-label="Select Firework Type">
+                            <option value="random">🌟 Dynamic Variety</option>
+                            <option value="peony">🌸 Imperial Peony</option>
+                            <option value="willow">🌾 Golden Willow Cascade</option>
+                            <option value="ring">🪐 Saturn Ring</option>
+                            <option value="crackle">⚡ Crackling Palm</option>
+                            <option value="anar">🌋 Ground Anar Fountain</option>
+                            <option value="chakkar">🌀 Whirling Chakkar Spinner</option>
+                        </select>
+
+                        <span class="ctrl-label">Color Palette:</span>
+                        <select id="firework-color-select" class="firework-select" aria-label="Select Firework Color Palette">
+                            <option value="rainbow">🌈 Festive Rainbow</option>
+                            <option value="gold">✨ Imperial Gold</option>
+                            <option value="green">🌿 Emerald Green</option>
+                            <option value="blue">💎 Peacock Blue</option>
+                            <option value="crimson">❤️ Royal Crimson</option>
+                            <option value="purple">🔮 Celestial Purple</option>
+                        </select>
+
+                        <button id="toggle-sparkler-mode-btn" class="sanctuary-btn" type="button">
+                            ✨ Handheld Sparkler (Phuljhadi)
+                        </button>
+                        <button id="toggle-autoshow-btn" class="sanctuary-btn" type="button">
+                            🎆 Auto Firework Show
+                        </button>
+                    </div>
+
+                    <!-- Eco Impact Card -->
+                    <div class="eco-stats-card">
+                        <div class="eco-stat-item">
+                            Rockets: <strong id="eco-launch-count">0</strong>
+                        </div>
+                        <div class="eco-stat-item">
+                            CO₂ Averted: <strong id="eco-co2-saved">0.00 kg</strong>
+                        </div>
+                        <div class="eco-stat-item">
+                            Smoke Dust Saved: <strong id="eco-pm-saved">0.00 g</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             MODULE 3: KALEIDOSCOPE RANGOLI STUDIO
+             ================================================================== -->
+        <section id="tab-rangoli" class="tab-panel" role="tabpanel" aria-labelledby="nav-btn-rangoli">
+            <div class="section-headline-group">
+                <span class="section-tag">Geometric Art & Symmetry</span>
+                <h2>Kaleidoscopic Rangoli Designer</h2>
+                <p>Create traditional symmetrical mandalas using authentic festival powder hues, glitter glow brushes, and multi-axis radial symmetry. Download your masterpiece as a high-res PNG!</p>
+            </div>
+
+            <div class="rangoli-studio-wrapper">
+                <div class="rangoli-layout-grid">
+                    <!-- Tools Control Panel -->
+                    <div class="rangoli-tools-panel">
+                        <div>
+                            <div class="tool-group-title">Powder Color Palette</div>
+                            <div class="color-swatches-grid">
+                                <button class="rangoli-color-swatch active" data-color="#ffbe0b" style="background:#ffbe0b;" title="Haldi Yellow" aria-label="Haldi Yellow"></button>
+                                <button class="rangoli-color-swatch" data-color="#e63946" style="background:#e63946;" title="Kumkum Red" aria-label="Kumkum Red"></button>
+                                <button class="rangoli-color-swatch" data-color="#ff007f" style="background:#ff007f;" title="Gulal Rani Pink" aria-label="Gulal Rani Pink"></button>
+                                <button class="rangoli-color-swatch" data-color="#00b4d8" style="background:#00b4d8;" title="Peacock Blue" aria-label="Peacock Blue"></button>
+                                <button class="rangoli-color-swatch" data-color="#06d6a0" style="background:#06d6a0;" title="Sacred Basil Green" aria-label="Sacred Basil Green"></button>
+                                <button class="rangoli-color-swatch" data-color="#ffd700" style="background:#ffd700;" title="Shimmer Gold" aria-label="Shimmer Gold"></button>
+                                <button class="rangoli-color-swatch" data-color="#fb5607" style="background:#fb5607;" title="Marigold Orange" aria-label="Marigold Orange"></button>
+                                <button class="rangoli-color-swatch" data-color="#ffffff" style="background:#ffffff;" title="Rice Flour White" aria-label="Rice Flour White"></button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="tool-group-title">Brush Style</div>
+                            <div class="brush-buttons-group">
+                                <button class="rangoli-brush-btn active" data-brush="powder" type="button">🌾 Dry Powder</button>
+                                <button class="rangoli-brush-btn" data-brush="glitter" type="button">✨ Glitter Glow</button>
+                                <button class="rangoli-brush-btn" data-brush="dots" type="button">⚪ Kolam Dots</button>
+                                <button class="rangoli-brush-btn" data-brush="eraser" type="button">🧹 Soft Eraser</button>
+                            </div>
+                        </div>
+
+                        <div class="slider-ctrl-row">
+                            <div class="slider-label-val">
+                                <span>Radial Symmetry</span>
+                                <strong id="rangoli-symmetry-val">8 Folds</strong>
+                            </div>
+                            <input type="range" id="rangoli-symmetry-slider" class="custom-range-slider" min="4" max="16" step="2" value="8">
+                            <label style="font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; margin-top: 4px;">
+                                <input type="checkbox" id="rangoli-mirror-toggle" checked>
+                                Mirror Reflection (Mandala Mode)
+                            </label>
+                        </div>
+
+                        <div class="slider-ctrl-row">
+                            <div class="slider-label-val">
+                                <span>Powder Grain Size</span>
+                            </div>
+                            <input type="range" id="rangoli-size-slider" class="custom-range-slider" min="2" max="24" value="6">
+                        </div>
+
+                        <div>
+                            <div class="tool-group-title">Auspicious Stencils</div>
+                            <div class="stencils-row">
+                                <button class="stencil-select-btn" data-stencil="lotus" type="button">🌸 Lotus</button>
+                                <button class="stencil-select-btn" data-stencil="diya" type="button">🪔 Diya</button>
+                                <button class="stencil-select-btn" data-stencil="mandala" type="button">🕸️ Mandala</button>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 8px;">
+                            <button id="rangoli-undo-btn" class="sanctuary-btn" style="flex: 1;" type="button">↩️ Undo</button>
+                            <button id="rangoli-clear-btn" class="sanctuary-btn" style="flex: 1;" type="button">🗑️ Clear</button>
+                        </div>
+                    </div>
+
+                    <!-- Rangoli Drawing Viewport -->
+                    <div class="rangoli-canvas-viewport">
+                        <canvas id="rangoli-canvas" width="540" height="540"></canvas>
+                        <div class="rangoli-viewport-actions">
+                            <button id="rangoli-download-btn" class="btn-festive-primary" type="button">
+                                📥 Save & Download Rangoli PNG
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             MODULE 4: THE SCIENCE OF DIWALI LAB (STEM)
+             ================================================================== -->
+        <section id="tab-science" class="tab-panel" role="tabpanel" aria-labelledby="nav-btn-science">
+            <div class="section-headline-group">
+                <span class="section-tag">STEM Innovations & Physics</span>
+                <h2>The Science of Diwali Interactive Lab</h2>
+                <p>Discover the atomic physics behind firework colors, the fluid capillary dynamics of oil lamps, and revolutionary CSIR-NEERI green cracker chemistry.</p>
+            </div>
+
+            <div class="science-lab-wrapper">
+                <div class="experiment-cards-container">
+                    
+                    <!-- Experiment 1: Atomic Flame Spectroscopy -->
+                    <article class="experiment-card" aria-label="Experiment: Fireworks Chemistry">
+                        <span class="exp-badge">🔬 Experiment 1 • Quantum Emission Spectroscopy</span>
+                        <h3 style="font-family: var(--font-heading); color: var(--gold); margin-bottom: 8px;">
+                            The Chemistry of Firework Colors (Atomic Flame Test)
+                        </h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+                            When metal salts are introduced into extreme heat, electrons absorb thermal energy and jump to higher quantum orbitals. 
+                            As they fall back to ground state, they release energy as photons with exact wavelengths: 
+                            <strong style="color: var(--gold-bright);">ΔE = h · c / λ</strong>.
+                        </p>
+
+                        <div class="flame-lab-rig">
+                            <!-- Bunsen Burner Flame Rig -->
+                            <div class="bunsen-burner-scene">
+                                <div id="lab-bunsen-flame" class="bunsen-flame"></div>
+                                <div class="lab-bunsen-burner">
+                                    <div class="burner-base"></div>
+                                </div>
+                                <div id="nichrome-test-wire" class="nichrome-wire idle"></div>
+
+                                <div class="petri-dish-holder">
+                                    <div class="petri-dish">
+                                        <div id="petri-dish-salt-sample"></div>
+                                    </div>
+                                    <span style="font-size: 0.75rem; color: #aaa;">Chemical Salt</span>
+                                </div>
+                            </div>
+
+                            <!-- Controls & Spectral Readout -->
+                            <div class="spectroscopy-info-box">
+                                <span class="tool-group-title">Select Metal Salt Compound</span>
+                                <div class="salt-selection-chips">
+                                    <button class="salt-selector-btn active" data-salt="strontium" type="button">Strontium (Sr)</button>
+                                    <button class="salt-selector-btn" data-salt="barium" type="button">Barium (Ba)</button>
+                                    <button class="salt-selector-btn" data-salt="copper" type="button">Copper (Cu)</button>
+                                    <button class="salt-selector-btn" data-salt="sodium" type="button">Sodium (Na)</button>
+                                    <button class="salt-selector-btn" data-salt="calcium" type="button">Calcium (Ca)</button>
+                                    <button class="salt-selector-btn" data-salt="titanium" type="button">Titanium / Sparklers</button>
+                                </div>
+
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.85rem; margin-bottom: 12px;">
+                                    <div>Chemical: <strong id="flame-salt-name">Strontium Carbonate</strong></div>
+                                    <div>Formula: <strong id="flame-salt-formula" style="color: var(--gold);">SrCO₃</strong></div>
+                                    <div>Emission Hue: <strong id="flame-color-name" style="color: #ff0037;">Crimson Red</strong></div>
+                                    <div>Wavelength: <strong id="flame-wavelength">606 - 650 nm</strong></div>
+                                </div>
+
+                                <div class="spectrogram-container">
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px;">Emission Spectral Line Output (380 nm - 700 nm):</div>
+                                    <div id="spectrogram-display"></div>
+                                </div>
+
+                                <p id="flame-fun-fact" style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; background: rgba(255,255,255,0.04); padding: 8px 12px; border-radius: 6px;"></p>
+
+                                <div class="flame-lab-actions">
+                                    <button id="test-flame-btn" class="btn-festive-primary" type="button">
+                                        🔥 Dip Wire & Test in Flame
+                                    </button>
+                                    <button id="launch-lab-rocket-btn" class="btn-festive-secondary" type="button">
+                                        🚀 Launch Custom Shell
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Experiment 2: Physics of the Diya (Capillary Action) -->
+                    <article class="experiment-card" aria-label="Experiment: Diya Fluid Dynamics">
+                        <span class="exp-badge">💧 Experiment 2 • Fluid Mechanics</span>
+                        <h3 style="font-family: var(--font-heading); color: var(--gold); margin-bottom: 8px;">
+                            The Physics of the Diya (Capillary Action & Jurin's Law)
+                        </h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+                            How does heavy mustard oil or molten ghee climb upward against Earth's gravity to nourish a constant flame? 
+                            The adhesive forces between polar cellulose fibers in cotton and liquid molecules create high surface tension, drawing fuel up microscopic pores.
+                        </p>
+
+                        <div class="diya-physics-rig">
+                            <!-- Microscope Wick Cross-Section View -->
+                            <div class="microscope-wick-view">
+                                <div class="cotton-fibers-weave">
+                                    <div id="wick-fluid-rise-indicator"></div>
+                                </div>
+                                <span style="position: absolute; top: 12px; font-size: 0.75rem; color: var(--gold); letter-spacing: 1px;">
+                                    🔬 200x COTTON WICK MICROSCOPY
+                                </span>
+                            </div>
+
+                            <div class="spectroscopy-info-box">
+                                <div class="physics-equation-box">
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px;">Jurin's Capillary Rise Equation:</div>
+                                    <code>h = (2 · γ · cos θ) / (ρ · g · r)</code>
+                                    <div style="font-size: 0.75rem; color: #aaa; margin-top: 4px;">
+                                        Where <strong>γ</strong> = Surface Tension, <strong>θ</strong> = Contact Angle, <strong>ρ</strong> = Fuel Density, <strong>r</strong> = Cotton Pore Radius
+                                    </div>
+                                </div>
+
+                                <div class="tool-group-title">Select Diya Fuel / Oil:</div>
+                                <div class="fuel-options-group">
+                                    <label class="fuel-radio-label">
+                                        <input type="radio" name="diya-fuel" class="fuel-radio-input" value="ghee" checked>
+                                        Desi Cow Ghee
+                                    </label>
+                                    <label class="fuel-radio-label">
+                                        <input type="radio" name="diya-fuel" class="fuel-radio-input" value="mustard">
+                                        Mustard Oil
+                                    </label>
+                                    <label class="fuel-radio-label">
+                                        <input type="radio" name="diya-fuel" class="fuel-radio-input" value="sesame">
+                                        Sesame (Til) Oil
+                                    </label>
+                                    <label class="fuel-radio-label">
+                                        <input type="radio" name="diya-fuel" class="fuel-radio-input" value="water">
+                                        Pure Water (Negative Control)
+                                    </label>
+                                </div>
+
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0;">
+                                    <div>
+                                        <span style="font-size: 0.8rem; color: var(--text-muted);">Pore Radius (r):</span>
+                                        <input type="range" id="wick-pore-slider" class="custom-range-slider" min="5" max="30" value="15">
+                                    </div>
+                                    <div>
+                                        <span style="font-size: 0.8rem; color: var(--text-muted);">Fuel Temperature (°C):</span>
+                                        <input type="range" id="oil-temp-slider" class="custom-range-slider" min="20" max="60" value="28">
+                                    </div>
+                                </div>
+
+                                <div style="display: flex; gap: 16px; font-size: 0.85rem; margin-top: 10px;">
+                                    <div>Capillary Rise (h): <strong id="capillary-height-metric" style="color: var(--gold-bright);">22.4 mm</strong></div>
+                                    <div>Surface Tension: <strong id="fuel-surface-tension-val">30.8 mN/m</strong></div>
+                                    <div>Smoke Point: <strong id="fuel-smoke-point-val">250°C</strong></div>
+                                </div>
+
+                                <div id="flame-combustion-status" style="margin-top: 12px; font-size: 0.85rem; padding: 8px 12px; background: rgba(0,0,0,0.3); border-radius: 6px;"></div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Experiment 3: Green Crackers vs Traditional Fireworks Analyzer -->
+                    <article class="experiment-card" aria-label="Experiment: Green Fireworks">
+                        <span class="exp-badge">🌿 Experiment 3 • Environmental Engineering</span>
+                        <h3 style="font-family: var(--font-heading); color: var(--gold); margin-bottom: 8px;">
+                            Green Crackers (CSIR-NEERI) vs Traditional Pyrotechnics
+                        </h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+                            Traditional firecrackers generate dangerous particulate matter (PM2.5) and poisonous Barium Nitrate fumes. 
+                            India's CSIR-NEERI developed revolutionary green crackers (SWAS, STAR, SAFAL) that slash dust by 35% and completely eliminate toxic heavy metals.
+                        </p>
+
+                        <div class="green-crackers-dashboard">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                                <strong id="cracker-comparison-mode" style="color: var(--emerald); font-size: 1rem;">
+                                    🌿 CSIR-NEERI Certified Green Crackers (SWAS, STAR, SAFAL)
+                                </strong>
+                                <button id="compare-crackers-toggle" class="sanctuary-btn" type="button">
+                                    Switch to Traditional Crackers View
+                                </button>
+                            </div>
+
+                            <div class="metric-bar-group">
+                                <div class="metric-header">
+                                    <span>Particulate Matter (PM2.5 Dust Concentration):</span>
+                                    <span>Safe Threshold: &lt; 250 µg/m³</span>
+                                </div>
+                                <div class="metric-progress-track">
+                                    <div id="metric-pm25-bar" class="metric-progress-fill" style="width: 32%; background: var(--emerald);">
+                                        180 µg/m³ (30-35% Reduction)
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="metric-bar-group">
+                                <div class="metric-header">
+                                    <span>Sulfur Dioxide (SO₂) Gas Emissions:</span>
+                                    <span>Low Respiratory Irritant</span>
+                                </div>
+                                <div class="metric-progress-track">
+                                    <div id="metric-so2-bar" class="metric-progress-fill" style="width: 25%; background: var(--emerald);">
+                                        35 µg/m³ (Low Sulfur)
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="metric-bar-group">
+                                <div class="metric-header">
+                                    <span>Peak Sound Decibel Level (dB):</span>
+                                    <span>Legal Limit: 125 dB</span>
+                                </div>
+                                <div class="metric-progress-track">
+                                    <div id="metric-decibel-bar" class="metric-progress-fill" style="width: 60%; background: var(--emerald);">
+                                        105-110 dB (Auditory Safe)
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="metric-barium-status" style="font-size: 0.85rem; padding: 12px; border-radius: 6px; background: rgba(0,0,0,0.3); margin-top: 14px; color: var(--emerald);">
+                                <strong>Zero Barium, Zero Lead, Zero Arsenic:</strong> Uses potassium nitrate + potassium perchlorate or water-releasing binders.
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             MODULE 5: FESTIVE GREETING CARD MAKER
+             ================================================================== -->
+        <section id="tab-cards" class="tab-panel" role="tabpanel" aria-labelledby="nav-btn-cards">
+            <div class="section-headline-group">
+                <span class="section-tag">Personalized Celebrations</span>
+                <h2>Diwali Wishes & Greeting Card Maker</h2>
+                <p>Personalize a high-resolution festive greeting card with golden typography, traditional borders, and custom blessings to share with your loved ones.</p>
+            </div>
+
+            <div class="greeting-card-wrapper">
+                <div class="card-maker-grid">
+                    <!-- Controls Panel -->
+                    <div class="card-controls-panel">
+                        <div>
+                            <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 4px;">To (Recipient Name):</label>
+                            <input type="text" id="card-to-input" class="card-input-field" value="Dear Family & Friends" maxlength="35">
+                        </div>
+
+                        <div>
+                            <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 4px;">From (Sender Name):</label>
+                            <input type="text" id="card-from-input" class="card-input-field" value="With Warmest Blessings" maxlength="35">
+                        </div>
+
+                        <div>
+                            <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Choose Blessing Message:</label>
+                            <select id="card-msg-preset" class="card-input-field">
+                                <option value="May the divine light of Diwali illuminate your life with infinite joy, good health, and radiant prosperity!">Classic Light & Prosperity</option>
+                                <option value="Wishing you and your beloved family a sparkling Diwali and an auspicious, flourishing New Year!">New Year & Happiness</option>
+                                <option value="May the light of knowledge dispel every shadow of doubt and guide you towards grand triumphs!">Wisdom & Triumph</option>
+                                <option value="custom">✍️ Write Custom Festive Message</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Custom Message Text:</label>
+                            <textarea id="card-custom-msg" class="card-input-field" rows="3" maxlength="160">May the divine light of Diwali illuminate your life with infinite joy, good health, and radiant prosperity!</textarea>
+                        </div>
+
+                        <div>
+                            <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 6px;">Card Royal Theme:</label>
+                            <div class="card-theme-options">
+                                <label class="card-theme-label">
+                                    <input type="radio" name="card-theme" class="card-theme-radio" value="midnight" checked>
+                                    Midnight Gold
+                                </label>
+                                <label class="card-theme-label">
+                                    <input type="radio" name="card-theme" class="card-theme-radio" value="crimson">
+                                    Crimson Festival
+                                </label>
+                                <label class="card-theme-label">
+                                    <input type="radio" name="card-theme" class="card-theme-radio" value="emerald">
+                                    Emerald Palace
+                                </label>
+                                <label class="card-theme-label">
+                                    <input type="radio" name="card-theme" class="card-theme-radio" value="purple">
+                                    Royal Violet
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 6px;">Center Festive Motif:</label>
+                            <div class="card-sticker-options">
+                                <label class="card-sticker-label">
+                                    <input type="radio" name="card-sticker" class="card-sticker-radio" value="diya" checked>
+                                    🪔 Golden Diya
+                                </label>
+                                <label class="card-sticker-label">
+                                    <input type="radio" name="card-sticker" class="card-sticker-radio" value="lotus">
+                                    🌸 Sacred Lotus
+                                </label>
+                                <label class="card-sticker-label">
+                                    <input type="radio" name="card-sticker" class="card-sticker-radio" value="kalash">
+                                    🥥 Holy Kalash
+                                </label>
+                                <label class="card-sticker-label">
+                                    <input type="radio" name="card-sticker" class="card-sticker-radio" value="fireworks">
+                                    🎆 Spark Burst
+                                </label>
+                            </div>
+                        </div>
+
+                        <button id="download-card-btn" class="btn-festive-primary" type="button" style="margin-top: 8px;">
+                            📥 Download High-Res Greeting Card (PNG)
+                        </button>
+                    </div>
+
+                    <!-- Live High-Definition Preview -->
+                    <div class="card-preview-viewport">
+                        <div class="card-canvas-frame">
+                            <canvas id="greeting-card-canvas" width="900" height="600"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             MODULE 6: 5 DAYS OF DIWALI & SACRED FOLKLORE
+             ================================================================== -->
+        <section id="tab-story" class="tab-panel" role="tabpanel" aria-labelledby="nav-btn-story">
+            <div class="section-headline-group">
+                <span class="section-tag">Timeless Cultural Lore</span>
+                <h2>The 5 Days of Diwali & Sacred Traditions</h2>
+                <p>Each day of Diwali holds profound mythological significance, spiritual wisdom, beloved festive delicacies, and ancient family rituals.</p>
+            </div>
+
+            <div id="story-days-timeline" class="story-timeline-grid"></div>
+
+            <!-- Interactive Story Reader Modal -->
+            <div id="story-detail-modal" class="story-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="story-modal-title">
+                <div class="story-modal-dialog">
+                    <button id="close-story-modal-btn" class="modal-close-btn" aria-label="Close Story Modal">✕</button>
+                    <div id="story-modal-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             MODULE 7: FESTIVE TRIVIA QUEST & MASTER CERTIFICATE
+             ================================================================== -->
+        <section id="tab-quiz" class="tab-panel" role="tabpanel" aria-labelledby="nav-btn-quiz">
+            <div class="section-headline-group" style="text-align: center;">
+                <span class="section-tag">Test Your Knowledge</span>
+                <h2>Diwali Festival & Science Master Quest</h2>
+                <p>Take the 8-question challenge combining cultural legends with pyrotechnic chemistry to earn your official Certificate of Excellence!</p>
+            </div>
+
+            <div class="quiz-quest-wrapper">
+                <!-- Question Card -->
+                <div id="quiz-question-card">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--gold);">
+                        <span id="quiz-progress-text">Question 1 of 8</span>
+                        <span>Diwali STEM Quest</span>
+                    </div>
+                    <div class="quiz-progress-bar-track">
+                        <div id="quiz-progress-fill"></div>
+                    </div>
+
+                    <h3 id="quiz-question-title" class="quiz-question-title"></h3>
+
+                    <div id="quiz-options-grid" class="quiz-options-container"></div>
+
+                    <div id="quiz-feedback-box" class="quiz-feedback-box hidden" role="region" aria-live="polite"></div>
+
+                    <button id="quiz-next-btn" class="btn-festive-primary" type="button" style="width: 100%;" disabled>
+                        Next Question ➔
+                    </button>
+                </div>
+
+                <!-- Results & Certificate Card -->
+                <div id="quiz-results-card" class="quiz-results-container hidden">
+                    <div class="confetti-canvas-wrapper">
+                        <canvas id="confetti-canvas"></canvas>
+                    </div>
+
+                    <div style="text-align: center;">
+                        <h3 style="font-family: var(--font-heading); color: var(--gold); font-size: 2rem;">Quest Completed!</h3>
+                        <p style="font-size: 1.25rem; margin: 12px 0;">
+                            Your Final Score: <strong id="quiz-final-score" style="color: var(--emerald);">8</strong> / <span id="quiz-total-score">8</span>
+                        </p>
+                        <p id="quiz-result-message" style="color: var(--text-secondary); max-width: 500px; margin: 0 auto 24px;"></p>
+
+                        <div class="certificate-section-box">
+                            <h4 style="font-family: var(--font-heading); color: var(--gold-bright);">
+                                🎓 Generate Your Official Diwali Master Certificate
+                            </h4>
+                            <p style="font-size: 0.85rem; color: #ccc;">Enter your name to generate a certificate accredited with your score and date:</p>
+                            
+                            <div class="cert-input-row">
+                                <input type="text" id="cert-student-name" class="card-input-field" placeholder="Enter Your Full Name..." maxlength="30" style="max-width: 320px;">
+                                <button id="generate-certificate-btn" class="btn-festive-primary" type="button">
+                                    📜 Download Certificate PNG
+                                </button>
+                            </div>
+
+                            <canvas id="certificate-canvas" width="1000" height="680"></canvas>
+                        </div>
+
+                        <button id="quiz-restart-btn" class="sanctuary-btn" type="button" style="margin-top: 24px;">
+                            🔄 Retake Quiz Challenge
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="app-footer" role="contentinfo">
+            <p style="font-size: 1rem; color: var(--gold); font-family: var(--font-heading); margin-bottom: 6px;">
+                शुभ दीपावली • MAY LIGHT TRIUMPH OVER DARKNESS, KNOWLEDGE OVER IGNORANCE
+            </p>
+            <p>Designed for JetLearn AI Inventors &amp; Science Lab • Powered by Pure HTML5, CSS3, &amp; Web Audio API.</p>
+        </footer>
+    </div>
+
+    <!-- Scripts (Loaded in dependency order) -->
+    <script src="audio.js"></script>
+    <script src="fireworks.js"></script>
+    <script src="diya.js"></script>
+    <script src="rangoli.js"></script>
+    <script src="science-lab.js"></script>
+    <script src="greeting-card.js"></script>
+    <script src="story.js"></script>
+    <script src="quiz.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
